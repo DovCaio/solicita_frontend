@@ -6,17 +6,33 @@ import Button from "@/components/ui/button/Button";
 import { EyeCloseIcon, EyeIcon } from "@/icons";
 import { api } from "@/lib/api";
 import { useState } from "react";
+import Alert from "../ui/alert/Alert";
 
 export default function SignInForm() {
   const [showPassword, setShowPassword] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const { username, password } = e.currentTarget.elements as any;
-    api.post("/auth/login", {
-      username: username.value,
-      password: password.value,
-    });
+    api
+      .post("/auth/login", {
+        username: username.value,
+        password: password.value,
+      })
+      .then((response) => {
+        window.location.href = "/";
+      })
+      .catch((error) => {
+        console.error("Login failed:", error);
+        setError(
+          error.response?.data?.message ||
+            "Falha ao fazer login. Por favor, tente novamente.",
+        );
+        setTimeout(() => {
+          setError(null);
+        }, 5000);
+      });
   };
 
   return (
@@ -81,6 +97,11 @@ export default function SignInForm() {
           </div>
         </div>
       </div>
+      {error && (
+        <div className="absolute right-1 bottom-1 max-w-1/5">
+          <Alert title="Error No Login" variant="error" message={error} />
+        </div>
+      )}
     </div>
   );
 }
