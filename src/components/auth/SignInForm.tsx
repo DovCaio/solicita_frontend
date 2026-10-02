@@ -7,10 +7,11 @@ import { EyeCloseIcon, EyeIcon } from "@/icons";
 import { api } from "@/lib/api";
 import { useState } from "react";
 import Alert from "../ui/alert/Alert";
+import { useApiError } from "@/hooks/useApiErrorContext";
 
 export default function SignInForm() {
   const [showPassword, setShowPassword] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+  const { showError } = useApiError();
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -25,13 +26,10 @@ export default function SignInForm() {
       })
       .catch((error) => {
         console.error("Login failed:", error);
-        setError(
+        showError(
           error.response?.data?.message ||
             "Falha ao fazer login. Por favor, tente novamente.",
         );
-        setTimeout(() => {
-          setError(null);
-        }, 5000);
       });
   };
 
@@ -97,11 +95,6 @@ export default function SignInForm() {
           </div>
         </div>
       </div>
-      {error && (
-        <div className="absolute right-1 bottom-1 max-w-1/5">
-          <Alert title="Error No Login" variant="error" message={error} />
-        </div>
-      )}
     </div>
   );
 }

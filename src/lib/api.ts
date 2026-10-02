@@ -7,3 +7,22 @@ export const api = axios.create({
     "Content-Type": "application/json",
   },
 });
+
+api.interceptors.response.use(
+  (response) => response,
+
+  (error) => {
+    if (axios.isAxiosError(error)) {
+      const message =
+        error.response?.data?.message ??
+        "Algum problema ocorreu. Por favor, tente novamente.";
+
+      return Promise.reject({
+        ...error,
+        userMessage: message,
+      });
+    }
+
+    return Promise.reject(error);
+  },
+);
