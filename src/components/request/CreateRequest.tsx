@@ -27,6 +27,7 @@ export const CreateRequest = ({ data, setData }: CreateRequestProps) => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    const form = e.currentTarget;
     const formData = new FormData(e.currentTarget);
     const title = formData.get("title") as string;
     const description = textAreaValue;
@@ -41,10 +42,11 @@ export const CreateRequest = ({ data, setData }: CreateRequestProps) => {
       .then((response) => {
         const newRequest: Request = response.data;
         setData([...data, newRequest]);
-        // Aqui você pode adicionar lógica para atualizar a lista de requisições ou redirecionar o usuário
+        form.reset();
+        setTextAreaValue("");
       })
       .catch((error) => {
-        showError("Erro ao criar requisição: " + error.response.data?.message);
+        showError("Erro ao criar requisição " + error?.response?.data?.message);
       });
   };
 
