@@ -24,8 +24,6 @@ export const RequestSearch = ({ data, setData }: RequestSearchProps) => {
       endDate: formData.get("endDate") as string,
     };
 
-    console.log("Filtros:", filters);
-
     api
       .get("/requests", {
         params: filters,

@@ -6,6 +6,7 @@ import Button from "../ui/button/Button";
 import { api } from "@/lib/api";
 import { useApiError } from "@/hooks/useApiErrorContext";
 import ComponentCard from "../common/ComponentCard";
+import { Request } from "@/types/Request";
 
 const acceptedCategories = [
   "TI",
@@ -15,7 +16,12 @@ const acceptedCategories = [
   "INFRAESTRUTURA",
 ];
 
-export const CreateRequest = () => {
+interface CreateRequestProps {
+  data: Request[];
+  setData: (data: Request[]) => void;
+}
+
+export const CreateRequest = ({ data, setData }: CreateRequestProps) => {
   const [textAreaValue, setTextAreaValue] = useState("");
   const { showError } = useApiError();
 
@@ -33,7 +39,8 @@ export const CreateRequest = () => {
         category,
       })
       .then((response) => {
-        console.log("Requisição criada com sucesso:", response.data);
+        const newRequest: Request = response.data;
+        setData([...data, newRequest]);
         // Aqui você pode adicionar lógica para atualizar a lista de requisições ou redirecionar o usuário
       })
       .catch((error) => {

@@ -6,9 +6,10 @@ import { RequestTable } from "@/components/request/RequestTable";
 import { useApiError } from "@/hooks/useApiErrorContext";
 import { api } from "@/lib/api";
 import { useEffect, useState } from "react";
+import { Request } from "@/types/Request";
 
 export default function RequestsPage() {
-  const [data, setData] = useState([]);
+  const [data, setData] = useState<Request[]>([]);
   const [loading, setLoading] = useState(true);
 
   const { showError } = useApiError();
@@ -33,7 +34,7 @@ export default function RequestsPage() {
     <ComponentCard title="Requisições">
       <div className="space-y-6 xl:col-span-7">
         <div>
-          <CreateRequest />
+          <CreateRequest data={data} setData={setData} />
         </div>
 
         <div className="overflow-hidden rounded-xl border border-gray-200 bg-white dark:border-white/5 dark:bg-white/3">
