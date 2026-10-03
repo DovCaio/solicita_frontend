@@ -10,6 +10,7 @@ import { useApiError } from "@/hooks/useApiErrorContext";
 import { api } from "@/lib/api";
 import { useEffect, useState } from "react";
 import { LoadingTable } from "../loading/LoadingTable";
+import { useRouter } from "@/i18n/navigation";
 
 interface Request {
   id: number;
@@ -25,6 +26,8 @@ export const RequestTable = () => {
   const [loading, setLoading] = useState(true);
 
   const { showError } = useApiError();
+
+  const route = useRouter();
 
   useEffect(() => {
     api
@@ -83,7 +86,13 @@ export const RequestTable = () => {
           <LoadingTable cellQuantity={5} />
         ) : (
           data.map((request) => (
-            <TableRow key={request.id}>
+            <TableRow
+              key={request.id}
+              className="hover:cursor-pointer hover:bg-gray-50 dark:hover:bg-white/5"
+              onClick={() => {
+                route.push(`/requests/${request.id}`);
+              }}
+            >
               <TableCell className="px-5 py-3 text-start text-theme-sm text-gray-700 dark:text-gray-300">
                 {request.title}
               </TableCell>
