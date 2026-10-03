@@ -3,7 +3,12 @@
 import { useApiError } from "@/hooks/useApiErrorContext";
 import { api } from "@/lib/api";
 
-export const RequestSearch = () => {
+interface RequestSearchProps {
+  data: any[];
+  setData: (data: never[]) => void;
+}
+
+export const RequestSearch = ({ data, setData }: RequestSearchProps) => {
   const { showError } = useApiError();
 
   const search = (e: React.FormEvent<HTMLFormElement>) => {
@@ -27,10 +32,9 @@ export const RequestSearch = () => {
         withCredentials: true,
       })
       .then((response) => {
-        console.log("Requisições filtradas:", response.data);
+        setData(response.data);
       })
       .catch((error) => {
-        console.error("Erro ao buscar requisições filtradas:", error);
         showError(
           error.response?.data?.message ||
             "Falha ao buscar requisições. Por favor, tente novamente mais tarde.",

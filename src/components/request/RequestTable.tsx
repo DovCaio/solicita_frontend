@@ -6,9 +6,6 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { useApiError } from "@/hooks/useApiErrorContext";
-import { api } from "@/lib/api";
-import { useEffect, useState } from "react";
 import { LoadingTable } from "../loading/LoadingTable";
 import { useRouter } from "@/i18n/navigation";
 
@@ -21,29 +18,13 @@ interface Request {
   createdAt: string;
 }
 
-export const RequestTable = () => {
-  const [data, setData] = useState<Request[]>([]);
-  const [loading, setLoading] = useState(true);
+interface RequestTableProps {
+  data: Request[];
+  loading: boolean;
+}
 
-  const { showError } = useApiError();
-
+export const RequestTable = ({ data, loading }: RequestTableProps) => {
   const route = useRouter();
-
-  useEffect(() => {
-    api
-      .get("/requests", { withCredentials: true })
-      .then((response) => {
-        setData(response.data);
-        setLoading(false);
-      })
-      .catch((error) => {
-        showError(
-          error.response.data?.message ||
-            "Falha ao buscar requisições. Por favor, recarregue a página.",
-        );
-        setLoading(false);
-      });
-  }, []);
 
   return (
     <Table>
