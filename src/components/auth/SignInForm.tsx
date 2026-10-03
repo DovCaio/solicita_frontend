@@ -6,7 +6,6 @@ import Button from "@/components/ui/button/Button";
 import { EyeCloseIcon, EyeIcon } from "@/icons";
 import { api } from "@/lib/api";
 import { useState } from "react";
-import Alert from "../ui/alert/Alert";
 import { useApiError } from "@/hooks/useApiErrorContext";
 
 export default function SignInForm() {
