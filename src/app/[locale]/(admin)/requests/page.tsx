@@ -1,3 +1,4 @@
+import { CreateRequest } from "@/components/request/CreateRequest";
 import { RequestTable } from "@/components/request/RequestTable";
 
 export default function RequestsPage() {
@@ -6,6 +7,10 @@ export default function RequestsPage() {
       <h1 className="text-title-md font-semibold text-gray-800 dark:text-white/90">
         Requisições
       </h1>
+
+      <div>
+        <CreateRequest />
+      </div>
 
       <div className="overflow-hidden rounded-xl border border-gray-200 bg-white dark:border-white/5 dark:bg-white/3">
         <RequestTable />
