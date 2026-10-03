@@ -1,5 +1,6 @@
 import ComponentCard from "@/components/common/ComponentCard";
 import { CreateRequest } from "@/components/request/CreateRequest";
+import { RequestSearch } from "@/components/request/RequestSearch";
 import { RequestTable } from "@/components/request/RequestTable";
 
 export default function RequestsPage() {
@@ -11,6 +12,7 @@ export default function RequestsPage() {
         </div>
 
         <div className="overflow-hidden rounded-xl border border-gray-200 bg-white dark:border-white/5 dark:bg-white/3">
+          <RequestSearch />
           <RequestTable />
         </div>
       </div>
