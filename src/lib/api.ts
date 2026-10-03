@@ -17,6 +17,15 @@ api.interceptors.response.use(
         error.response?.data?.message ??
         "Algum problema ocorreu. Por favor, tente novamente.";
 
+      if (error.response?.status === 401 || error.response?.status === 403) {
+        cookieStore.delete("JSESSIONID");
+        window.location.href = "/signin";
+        return Promise.reject({
+          ...error,
+          userMessage: "Sessão expirada. Por favor, faça login novamente.",
+        });
+      }
+
       return Promise.reject({
         ...error,
         userMessage: message,
