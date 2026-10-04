@@ -35,3 +35,24 @@
 //     }
 //   }
 // }
+
+declare global {
+  namespace Cypress {
+    interface Chainable {
+      login(): Chainable<void>;
+    }
+  }
+}
+
+export {};
+
+Cypress.Commands.add("login", () => {
+  cy.visit("/signin");
+
+  cy.get('input[name="username"]').type("admin");
+  cy.get('input[name="password"]').type("admin123");
+
+  cy.contains("button", "Logar").click();
+
+  cy.url().should("not.include", "/login");
+});
