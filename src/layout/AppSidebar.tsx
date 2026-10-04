@@ -232,13 +232,9 @@ const AppSidebar: React.FC = () => {
       onMouseEnter={() => !isExpanded && setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      <div
-        className={`flex py-8 ${
-          !isExpanded && !isHovered ? "xl:justify-center" : "justify-start"
-        }`}
-      >
+      <div className={`flex py-8 ${"xl:justify-center"}`}>
         <Link href="/">
-          <h1 className="text-3xl font-bold tracking-tight text-gray-900 dark:text-white">
+          <h1 className="text-center text-3xl font-bold tracking-tight text-gray-900 dark:text-white">
             Solicita
           </h1>
         </Link>
