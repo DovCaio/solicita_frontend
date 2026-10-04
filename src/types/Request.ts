@@ -4,5 +4,8 @@ export interface Request {
   description: string;
   category: string;
   status: string;
+  updatedAt: string;
   createdAt: string;
+  userId: number;
+  username: string;
 }
