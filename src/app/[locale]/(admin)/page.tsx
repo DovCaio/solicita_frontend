@@ -2,9 +2,8 @@ import { DashboardMetrics } from "@/components/dashboard/DashboardMetrics";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title:
-    "Next.js E-commerce Dashboard | TailAdmin - Next.js Dashboard Template",
-  description: "This is Next.js Home for TailAdmin Dashboard Template",
+  title: "Solicita Dashboard",
+  description: "Essa é a home page do Solicita",
 };
 
 export default function Dashboard() {
