@@ -26,7 +26,6 @@ jobs:
         run: npm run build
 
       - name: Start backend and database
-        working-directory: backend
         run: docker compose up -d
 
       - name: Wait for backend
