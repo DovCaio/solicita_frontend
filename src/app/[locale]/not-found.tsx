@@ -2,12 +2,8 @@
 
 import GridShape from "@/components/common/GridShape";
 import { Link } from "@/i18n/navigation";
-import { useTranslations } from "next-intl";
-import Image from "next/image";
 
 export default function NotFound() {
-  const t = useTranslations("notFound");
-
   return (
     <div className="relative z-1 flex min-h-screen flex-col items-center justify-center overflow-hidden p-6">
       <GridShape />
