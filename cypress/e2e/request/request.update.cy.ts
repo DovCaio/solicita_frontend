@@ -1,7 +1,12 @@
 describe("Testa a altesração da atividade", () => {
   beforeEach(() => {
     cy.deleteRequests();
-    cy.createARequest();
+    cy.createARequest(
+      "Request de teste",
+      "Descrição da request de teste",
+      "TI",
+      "ABERTO",
+    );
     cy.login();
 
     cy.get(".border-b > .border-gray-200").click();

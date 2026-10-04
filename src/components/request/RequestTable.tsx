@@ -27,7 +27,7 @@ export const RequestTable = ({ data, loading }: RequestTableProps) => {
   const route = useRouter();
 
   return (
-    <Table>
+    <Table id="request-table">
       <TableHeader className="border-b border-gray-100 dark:border-white/5">
         <TableRow>
           <TableCell
