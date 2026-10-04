@@ -4,6 +4,7 @@ import React, { ReactNode } from "react";
 interface TableProps {
   children: ReactNode; // Table content (thead, tbody, etc.)
   className?: string; // Optional className for styling
+  id?: string;
 }
 
 // Props for TableHeader
@@ -22,6 +23,8 @@ interface TableBodyProps {
 interface TableRowProps {
   children: ReactNode; // Cells (th or td)
   className?: string; // Optional className for styling
+  onClick?: () => void; // Optional click handler
+  id?: string;
 }
 
 // Props for TableCell
@@ -32,8 +35,12 @@ interface TableCellProps {
 }
 
 // Table Component
-const Table: React.FC<TableProps> = ({ children, className }) => {
-  return <table className={`min-w-full  ${className}`}>{children}</table>;
+const Table: React.FC<TableProps> = ({ children, className, id }) => {
+  return (
+    <table id={id} className={`min-w-full ${className}`}>
+      {children}
+    </table>
+  );
 };
 
 // TableHeader Component
@@ -47,8 +54,17 @@ const TableBody: React.FC<TableBodyProps> = ({ children, className }) => {
 };
 
 // TableRow Component
-const TableRow: React.FC<TableRowProps> = ({ children, className }) => {
-  return <tr className={className}>{children}</tr>;
+const TableRow: React.FC<TableRowProps> = ({
+  children,
+  className,
+  onClick,
+  id,
+}) => {
+  return (
+    <tr onClick={onClick} id={id} className={className}>
+      {children}
+    </tr>
+  );
 };
 
 // TableCell Component

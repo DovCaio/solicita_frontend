@@ -1,228 +1,301 @@
-# TailAdmin Next.js - Free Next.js Tailwind Admin Dashboard Template
+# Solicita — Frontend
 
-TailAdmin is a free and open-source admin dashboard template built on **Next.js and Tailwind CSS** providing developers with everything they need to create a feature-rich and data-driven: back-end, dashboard, or admin panel solution for any sort of web project.
+Frontend da aplicação **Solicita**, um sistema web para gerenciamento de solicitações internas.
 
-![TailAdmin - Next.js Dashboard Preview](./banner.png)
+O projeto permite que usuários autenticados criem, consultem, editem e acompanhem solicitações, além de visualizar informações consolidadas no dashboard.
 
-With TailAdmin Next.js, you get access to all the necessary dashboard UI components, elements, and pages required to build a high-quality and complete dashboard or admin panel. Whether you're building a dashboard or admin panel for a complex web application or a simple website.
+## Tecnologias
 
-TailAdmin utilizes the powerful features of **Next.js 16** and common features of Next.js such as server-side rendering (SSR), static site generation (SSG), and seamless API route integration. Combined with the advancements of **React 19** and the robustness of **TypeScript**, TailAdmin is the perfect solution to help get your project up and running quickly.
-
-## Overview
-
-TailAdmin provides essential UI components and layouts for building feature-rich, data-driven admin dashboards and control panels. It's built on:
-
-- Next.js 16.x
+- [Next.js](https://nextjs.org/) 16
 - React 19
 - TypeScript
-- Tailwind CSS V4
+- Material UI (MUI)
+- Tailwind CSS
+- Axios
+- next-intl
+- Cypress
+- Tabler Icons
 
-### Quick Links
+## Funcionalidades
 
-- [✨ Visit Website](https://tailadmin.com)
-- [📄 Documentation](https://tailadmin.com/docs)
-- [⬇️ Download](https://tailadmin.com/download)
-- [🖌️ Figma Design File (Community Edition)](https://www.figma.com/community/file/1463141366275764364)
-- [⚡ Get PRO Version](https://tailadmin.com/pricing)
+### Autenticação
 
-### Demos
+- Login com usuário e senha
+- Controle de sessão através de cookie
+- Proteção das rotas autenticadas
+- Logout
 
-- [Free Version](https://nextjs-free-demo.tailadmin.com)
-- [Pro Version](https://nextjs-demo.tailadmin.com)
+### Solicitações
 
-### Other Versions
+- Listagem de solicitações
+- Consulta de detalhes
+- Criação de solicitações
+- Edição de solicitações abertas
+- Exclusão de solicitações abertas
+- Alteração de status
+- Filtros por:
 
-- [Next.js Version](https://github.com/TailAdmin/free-nextjs-admin-dashboard)
-- [React.js Version](https://github.com/TailAdmin/free-react-tailwind-admin-dashboard)
-- [Vue.js Version](https://github.com/TailAdmin/vue-tailwind-admin-dashboard)
-- [Angular Version](https://github.com/TailAdmin/free-angular-tailwind-dashboard)
-- [Laravel Version](https://github.com/TailAdmin/tailadmin-laravel)
+  - Título
+  - Categoria
+  - Status
+  - Período
 
-## Installation
+### Dashboard
 
-### Prerequisites
+Apresenta um resumo das solicitações cadastradas:
 
-To get started with TailAdmin, ensure you have the following prerequisites installed and set up:
+- Total de solicitações
+- Solicitações abertas
+- Solicitações em atendimento
+- Solicitações concluídas
 
-- Node.js 20.x or later
+## Categorias
 
-### Cloning the Repository
+As solicitações podem pertencer às seguintes categorias:
 
-Clone the repository using the following command:
+- TI
+- RH
+- Compras
+- Financeiro
+- Infraestrutura
 
-```bash
-git clone https://github.com/TailAdmin/free-nextjs-admin-dashboard.git
+## Status
+
+- Aberto
+- Em Atendimento
+- Concluído
+
+## Estrutura do projeto
+
+A aplicação utiliza o **App Router** do Next.js, com `next-intl` para suporte à localização.
+
+```text
+src/
+├── app/
+│   └── [locale]/
+│       ├── layout.tsx
+│       ├── not-found.tsx
+│       │
+│       ├── (auth)/
+│       │   └── signin/
+│       │       └── page.tsx
+│       │
+│       └── (admin)/
+│           ├── layout.tsx
+│           ├── page.tsx
+│           └── requests/
+│               ├── page.tsx
+│               ├── new/
+│               │   └── page.tsx
+│               └── [id]/
+│                   ├── page.tsx
+│                   └── edit/
+│                       └── page.tsx
+│
+├── components/
+│   ├── dashboard/
+│   ├── requests/
+│   └── ui/
+│
+├── contexts/
+├── hooks/
+├── lib/
+├── types/
+└── i18n/
 ```
 
-> Windows Users: place the repository near the root of your drive if you face issues while cloning.
+As páginas da área administrativa são agrupadas em `(admin)` para compartilhar o mesmo layout, enquanto `(auth)` agrupa as páginas relacionadas à autenticação.
 
-1. Install dependencies:
+Os route groups não fazem parte da URL final da aplicação.
 
-   ```bash
-   npm install
-   # or
-   yarn install
-   ```
+## Integração com a API
 
-   > Use `--legacy-peer-deps` flag if you face peer-dependency error during installation.
+A comunicação com o backend é realizada através do Axios.
 
-2. Start the development server:
+A aplicação utiliza autenticação baseada em sessão, portanto as requisições enviam automaticamente os cookies através de:
 
-   ```bash
-   npm run dev
-   # or
-   yarn dev
-   ```
+```ts
+const api = axios.create({
+  baseURL: "http://localhost:8080/api",
+  withCredentials: true,
+});
+```
 
-## Components
+O backend deve estar disponível em:
 
-TailAdmin is a pre-designed starting point for building a web-based dashboard using Next.js and Tailwind CSS. The template includes:
+```text
+http://localhost:8080
+```
 
-- Sophisticated and accessible sidebar
-- Data visualization components
-- Profile management and custom 404 page
-- Tables and Charts(Line and Bar)
-- Authentication forms and input elements
-- Alerts, Dropdowns, Modals, Buttons and more
-- Can't forget Dark Mode 🕶️
+A documentação da API pode ser acessada através do Swagger:
 
-All components are built with React and styled using Tailwind CSS for easy customization.
+```text
+http://localhost:8080/swagger-ui.html
+```
 
-## Feature Comparison
+## Tratamento de erros
 
-### Free Version
+Os erros retornados pela API seguem uma estrutura padronizada:
 
-- 1 Unique Dashboard
-- 30+ dashboard components
-- 50+ UI elements
-- Basic Figma design files
-- Community support
+```json
+{
+  "message": "Mensagem do erro",
+  "timestamp": "2026-10-01T12:00:00Z"
+}
+```
 
-### Pro Version
+O frontend possui um tratamento centralizado para exibição dessas mensagens ao usuário, evitando que cada página precise implementar individualmente a mesma lógica de apresentação de erros.
 
-- 7 Unique Dashboards: Ecommerce, Analytics, Marketing, CRM, Stocks, SaaS, Logistics, AI, Sales, Finance (more coming soon)
-- 500+ dashboard components and UI elements
-- Complete Figma design file
-- Email support
+## Requisitos
 
-To learn more about pro version features and pricing, visit our [pricing page](https://tailadmin.com/pricing).
+Para executar o projeto localmente, é necessário possuir:
 
-## Changelog
+- Node.js 20+
+- npm
+- Backend do Solicita em execução
 
-### Version 2.4.0 - [September 13, 2026]
+## Instalação
 
-- Added Internationalization (Multi Language) support.
-- Updated complete template styles to support RTL.
-- Added Yearly View into calendar page.
-- Updated `maplibre-gl` implementation with `react-map-gl`.
-- Added new requested components and fixed noted accessibility issues.
-- Updated project structure and component compositions for easy adaption.
-- Added AGENTS.md to easily work with AI Agents.
-- Updated all the packages and libraries to the latest versions. Also removed unused packages.
+Clone o repositório:
 
-### Version 2.3.1 - [May 23, 2026]
+```bash
+git clone <URL_DO_REPOSITORIO>
+cd solicita-frontend
+```
 
-- Added AI Settings page to configure models, keys, and token limits.
-- Added Maps page with MapLibre GL, Leaflet, and iframe styles.
-- Added Vector Maps page powered by AmCharts 5 geodata (World & USA).
-- Added Radar Charts page with 3 unique formats.
-- Added Radial Progress Charts page featuring 4 custom layout templates.
-- Introduced new Bar Charts Five & Six and Pie Charts Four & Five.
+Instale as dependências:
 
-### Version 2.3.0 - [April 28, 2026]
+```bash
+npm install
+```
 
-- **New Feature**: Added **AI Dashboard** with token usage and revenue tracking.
-- **New Feature**: Added **Sales Dashboard** with retention and multi-channel analytics.
-- **New Feature**: Added **Finance Dashboard** with cashflow and balance management.
-- **New Feature**: Introduced **6 New Layout variations** for improved UI flexibility.
-- **Enhancement**: Integrated **Advanced Data Visualization** with 7+ new chart types.
+## Executando em desenvolvimento
 
-### Version 2.2.3 - [March 15, 2026]
+Inicie o servidor:
 
-- update ESLint configuration and dependencies; upgrade Next.js to version 16.1.6
+```bash
+npm run dev
+```
 
-### Version 2.2.2 - [December 30, 2025]
+Por padrão, a aplicação estará disponível em:
 
-- Fixed date picker positioning and functionality in Statistics Chart.
+```text
+http://localhost:3000
+```
 
-### Version 2.1.0 - [November 15, 2025]
+Caso seja necessário utilizar outra porta:
 
-- Updated to Next.js 16.x
-- Fixed all reported minor bugs
+```bash
+npm run dev -- -p 3002
+```
 
-### Version 2.0.2 - [March 25, 2025]
+## Build de produção
 
-- Upgraded to Next.js 16.x for [CVE-2025-29927](https://nextjs.org/blog/cve-2025-29927) concerns
-- Included overrides vectormap for packages to prevent peer dependency errors during installation.
-- Migrated from react-flatpickr to flatpickr package for React 19 support
+Para gerar a versão de produção:
 
-### Version 2.0.1 - [February 27, 2025]
+```bash
+npm run build
+```
 
-#### Update Overview
+Para iniciar a aplicação:
 
-- Upgraded to Tailwind CSS v4 for better performance and efficiency.
-- Updated class usage to match the latest syntax and features.
-- Replaced deprecated class and optimized styles.
+```bash
+npm start
+```
 
-#### Next Steps
+## Testes
 
-- Run npm install or yarn install to update dependencies.
-- Check for any style changes or compatibility issues.
-- Refer to the Tailwind CSS v4 [Migration Guide](https://tailwindcss.com/docs/upgrade-guide) on this release. if needed.
-- This update keeps the project up to date with the latest Tailwind improvements. 🚀
+Os testes end-to-end são realizados utilizando **Cypress**.
 
-### v2.0.0 (February 2025)
+Para abrir o Cypress em modo interativo:
 
-A major update focused on Next.js 16 implementation and comprehensive redesign.
+```bash
+npx cypress open
+```
 
-#### Major Improvements
+Para executar os testes em modo headless:
 
-- Complete redesign using Next.js 16 App Router and React Server Components
-- Enhanced user interface with Next.js-optimized components
-- Improved responsiveness and accessibility
-- New features including collapsible sidebar, chat screens, and calendar
-- Redesigned authentication using Next.js App Router and server actions
-- Updated data visualization using ApexCharts for React
+```bash
+npx cypress run
+```
 
-#### Breaking Changes
+Para executar apenas os testes de solicitações:
 
-- Migrated from Next.js 14 to Next.js 16
-- Chart components now use ApexCharts for React
-- Authentication flow updated to use Server Actions and middleware
+```bash
+npx cypress run --spec "cypress/e2e/requests.cy.ts"
+```
 
-[Read more](https://tailadmin.com/docs/update-logs/nextjs) on this release.
+Os testes cobrem principalmente o comportamento da aplicação através da interface, incluindo autenticação, criação, edição, exclusão, alteração de status, filtros e dashboard.
 
-### v1.3.4 (July 01, 2024)
+## Pré-requisitos para os testes
 
-- Fixed JSvectormap rendering issues
+Os testes utilizam o banco PostgreSQL utilizado pelo backend para preparar e limpar os dados necessários.
 
-### v1.3.3 (June 20, 2024)
+Portanto, antes de executar os testes:
 
-- Fixed build error related to Loader component
+1. Inicie o PostgreSQL/backend.
+2. Inicie o frontend.
+3. Execute o Cypress.
 
-### v1.3.2 (June 19, 2024)
+Exemplo:
 
-- Added ClickOutside component for dropdown menus
-- Refactored sidebar components
-- Updated Jsvectormap package
+```bash
+# Terminal 1
+docker compose up -d
 
-### v1.3.1 (Feb 12, 2024)
+# Terminal 2
+npm run dev -- -p 3002
 
-- Fixed layout naming consistency
-- Updated styles
+# Terminal 3
+npx cypress run
+```
 
-### v1.3.0 (Feb 05, 2024)
+## Variáveis e configuração
 
-- Upgraded to Next.js 14
-- Added Flatpickr integration
-- Improved form elements
-- Enhanced multiselect functionality
-- Added default layout component
+A URL da API é configurada no cliente Axios.
 
-## License
+Em um ambiente de produção, recomenda-se utilizar uma variável de ambiente para evitar que a URL da API fique diretamente no código.
 
-TailAdmin Next.js Free Version is released under the MIT License.
+Exemplo:
 
-## Support
+```env
+NEXT_PUBLIC_API_URL=http://localhost:8080/api
+```
 
-If you find this project helpful, please consider giving it a star on GitHub. Your support helps us continue developing and maintaining this template.
+## Decisões técnicas
+
+### Next.js App Router
+
+Foi utilizado o App Router por ser a arquitetura atual do Next.js e por permitir uma organização clara das páginas através de layouts e route groups.
+
+### Axios
+
+O Axios foi utilizado para centralizar a comunicação HTTP com a API e facilitar o envio automático das credenciais de sessão.
+
+### Sessão baseada em cookies
+
+A autenticação é realizada pelo backend através de sessão HTTP. O frontend não armazena credenciais ou tokens de autenticação no `localStorage`.
+
+### Route Groups
+
+Os route groups `(auth)` e `(admin)` permitem separar áreas da aplicação sem adicionar segmentos desnecessários às URLs.
+
+### Tratamento centralizado de erros
+
+As mensagens de erro da API são apresentadas através de um mecanismo compartilhado, mantendo as páginas e componentes focados em suas respectivas responsabilidades.
+
+### Testes end-to-end
+
+O Cypress foi utilizado para validar o comportamento da aplicação de forma próxima à utilização real pelo usuário, incluindo a interação com a API e o banco de dados.
+
+## Backend
+
+O frontend depende da API REST desenvolvida no repositório do backend.
+
+**Backend:** `<URL_DO_REPOSITORIO_BACKEND>`
+
+## Autor
+
+**Caio Jhonatan**
+
+Projeto desenvolvido como parte do processo seletivo para Desenvolvedor de Sistemas Júnior.
