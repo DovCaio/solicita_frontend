@@ -80,4 +80,25 @@ describe("Testa a alteração da atividade", () => {
 
     cy.get("#description").should("have.attr", "required");
   });
+
+  ["EM_ATENDIMENTO", "CONCLUIDO"].forEach((status) => {
+    it.only(`Não deve permitir editar uma requisição ${status}`, () => {
+      cy.deleteRequests();
+
+      cy.createARequest(
+        "Request bloqueada",
+        "Descrição original",
+        "TI",
+        status,
+      );
+
+      cy.login();
+
+      cy.get(".border-b > .border-gray-200").click();
+      cy.get(":nth-child(2) > .group").click();
+      cy.get("#1-request").click();
+
+      cy.contains("Editar").should("not.exist");
+    });
+  });
 });
