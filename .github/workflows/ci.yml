@@ -47,7 +47,7 @@ jobs:
 
       - name: Start frontend
         run: |
-          npm run dev -- -p 3002 > frontend.log 2>&1 &
+          npm run dev -- -p 3000 > frontend.log 2>&1 &
 
       - name: Wait for frontend
         run: |
