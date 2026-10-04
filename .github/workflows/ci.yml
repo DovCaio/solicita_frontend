@@ -54,7 +54,7 @@ jobs:
           echo "Aguardando frontend..."
 
           for i in {1..30}; do
-            if curl --fail --silent http://localhost:3002 > /dev/null; then
+            if curl --fail --silent http://localhost:3000 > /dev/null; then
               echo "Frontend disponível."
               exit 0
             fi
