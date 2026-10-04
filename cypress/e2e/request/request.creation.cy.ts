@@ -139,7 +139,7 @@ describe("Criação de request", () => {
     cy.get("body").should("contains.text", "A descrição não deve ser vazia.");
   });
 
-  it.only("Não deve criar uma requisição sem título e sem descrição", () => {
+  it("Não deve criar uma requisição sem título e sem descrição", () => {
     cy.get(":nth-child(3) > [name='category']").select("INFRAESTRUTURA");
 
     cy.get(".inline-flex").click();
