@@ -22,10 +22,7 @@ export default function RequestsPage() {
         setLoading(false);
       })
       .catch((error) => {
-        showError(
-          error.response.data?.message ||
-            "Falha ao buscar requisições. Por favor, recarregue a página.",
-        );
+        showError(error.response?.data?.message);
         setLoading(false);
       });
   }, []);

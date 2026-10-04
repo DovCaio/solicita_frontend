@@ -40,6 +40,7 @@ declare global {
   namespace Cypress {
     interface Chainable {
       login(): Chainable<void>;
+      deleteRequests(): Chainable<void>;
     }
   }
 }
@@ -55,4 +56,8 @@ Cypress.Commands.add("login", () => {
   cy.contains("button", "Logar").click();
 
   cy.url().should("not.include", "/login");
+});
+
+Cypress.Commands.add("deleteRequests", () => {
+  cy.task("clearRequests");
 });

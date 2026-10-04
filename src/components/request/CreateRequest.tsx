@@ -46,7 +46,7 @@ export const CreateRequest = ({ data, setData }: CreateRequestProps) => {
         setTextAreaValue("");
       })
       .catch((error) => {
-        showError("Erro ao criar requisição " + error?.response?.data?.message);
+        showError(error?.response?.data?.message);
       });
   };
 
