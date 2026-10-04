@@ -9,14 +9,7 @@ import {
 import { LoadingTable } from "../loading/LoadingTable";
 import { useRouter } from "@/i18n/navigation";
 
-interface Request {
-  id: number;
-  title: string;
-  description: string;
-  category: string;
-  status: string;
-  createdAt: string;
-}
+import { Request } from "@/types/Request";
 
 interface RequestTableProps {
   data: Request[];

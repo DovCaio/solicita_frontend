@@ -7,14 +7,7 @@ import { api } from "@/lib/api";
 import { useApiError } from "@/hooks/useApiErrorContext";
 import ComponentCard from "../common/ComponentCard";
 import { Request } from "@/types/Request";
-
-const acceptedCategories = [
-  "TI",
-  "RH",
-  "COMPRAS",
-  "FINANCEIRO",
-  "INFRAESTRUTURA",
-];
+import { acceptedCategories } from "@/types/AcceptedsCategories";
 
 interface CreateRequestProps {
   data: Request[];

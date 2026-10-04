@@ -4,18 +4,13 @@ import { useState } from "react";
 import { api } from "@/lib/api";
 import { Request } from "@/types/Request";
 import { useApiError } from "@/hooks/useApiErrorContext";
+import { statusLabels } from "@/types/EnumsAuxMapper";
 
 interface RequestStatusDialogProps {
   request: Request;
   onUpdated: (request: Request) => void;
   onClose: () => void;
 }
-
-const statusLabels: Record<Request["status"], string> = {
-  ABERTO: "Aberto",
-  EM_ATENDIMENTO: "Em Atendimento",
-  CONCLUIDO: "Concluído",
-};
 
 export const RequestStatusDialog = ({
   request,
