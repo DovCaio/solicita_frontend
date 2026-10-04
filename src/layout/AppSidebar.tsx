@@ -238,37 +238,9 @@ const AppSidebar: React.FC = () => {
         }`}
       >
         <Link href="/">
-          {isExpanded || isHovered || isMobileOpen ? (
-            <>
-              <Image
-                className="dark:hidden"
-                src="/images/logo/logo.svg"
-                alt="Logo"
-                width={150}
-                height={40}
-                priority
-                style={{ width: "auto", height: "auto" }}
-              />
-              <Image
-                className="hidden dark:block"
-                src="/images/logo/logo-dark.svg"
-                alt="Logo"
-                width={150}
-                height={40}
-                priority
-                style={{ width: "auto", height: "auto" }}
-              />
-            </>
-          ) : (
-            <Image
-              src="/images/logo/logo-icon.svg"
-              alt="Logo"
-              width={32}
-              height={32}
-              priority
-              style={{ width: "auto", height: "auto" }}
-            />
-          )}
+          <h1 className="text-3xl font-bold tracking-tight text-gray-900 dark:text-white">
+            Solicita
+          </h1>
         </Link>
       </div>
       <div className="no-scrollbar flex flex-col overflow-y-auto duration-300 ease-linear">
