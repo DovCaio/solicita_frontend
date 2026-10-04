@@ -7,7 +7,7 @@ const intlMiddleware = createMiddleware(routing);
 
 const publicRoutes = ["/signin"];
 
-export default async function proxy(request: NextRequest) {
+export default function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
   if (publicRoutes.includes(pathname)) {
@@ -18,10 +18,6 @@ export default async function proxy(request: NextRequest) {
 
   if (!session) {
     return NextResponse.redirect(new URL("/signin", request.url));
-  }
-
-  if (pathname === "/signin") {
-    return NextResponse.redirect(new URL("/", request.url));
   }
 
   return intlMiddleware(request);
