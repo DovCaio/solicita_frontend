@@ -1,6 +1,7 @@
 "use client";
 import ComponentCard from "@/components/common/ComponentCard";
 import { RequestDetail } from "@/components/request/RequestDetail";
+import { RequestEditForm } from "@/components/request/UpdateRequest";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Request } from "@/types/Request";
@@ -37,7 +38,10 @@ export default function RequestPage() {
             Requisição não encontrada.
           </p>
         ) : (
-          <RequestDetail request={request} />
+          <>
+            <RequestDetail request={request} />
+            <RequestEditForm request={request} onUpdated={setRequest} />
+          </>
         )}
       </div>
     </ComponentCard>
