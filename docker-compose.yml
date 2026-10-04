@@ -19,9 +19,7 @@ services:
       - postgres_data:/var/lib/postgresql/data
 
   solicita:
-    build:
-      context: .
-      dockerfile: Dockerfile
+    image: dovcaio/solicita-backend:sha-991a895
     container_name: solicita-backend
     restart: unless-stopped
     depends_on:
