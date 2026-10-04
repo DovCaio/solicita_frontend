@@ -21,7 +21,7 @@ describe("Testa a altesração da atividade", () => {
       cy.get("#1-request").click();
       cy.get(".justify-end > .flex").click();
 
-      cy.url().should("eq", "http://localhost:3002/requests");
+      cy.url().should("eq", "http://localhost:3000/requests");
 
       cy.get("#request-table").should(
         "not.contain.text",
@@ -49,9 +49,9 @@ describe("Testa a altesração da atividade", () => {
       cy.get("#1-request").click();
       cy.get(".justify-end > .flex").click();
 
-      cy.url().should("eq", "http://localhost:3002/requests/1");
+      cy.url().should("eq", "http://localhost:3000/requests/1");
 
-      cy.visit("http://localhost:3002/requests");
+      cy.visit("http://localhost:3000/requests");
 
       cy.get("#request-table").should(
         "contain.text",
@@ -79,9 +79,9 @@ describe("Testa a altesração da atividade", () => {
       cy.get("#1-request").click();
       cy.get(".justify-end > .flex").click();
 
-      cy.url().should("eq", "http://localhost:3002/requests/1");
+      cy.url().should("eq", "http://localhost:3000/requests/1");
 
-      cy.visit("http://localhost:3002/requests");
+      cy.visit("http://localhost:3000/requests");
 
       cy.get("#request-table").should(
         "contain.text",

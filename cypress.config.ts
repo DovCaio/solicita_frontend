@@ -60,6 +60,6 @@ export default defineConfig({
         },
       });
     },
-    baseUrl: "http://localhost:3002",
+    baseUrl: "http://localhost:3000",
   },
 });

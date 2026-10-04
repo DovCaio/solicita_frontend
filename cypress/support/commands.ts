@@ -25,7 +25,7 @@ Cypress.Commands.add("login", () => {
 
   cy.contains("button", "Logar").click();
 
-  cy.url().should("not.include", "/login");
+  cy.url().should("not.include", "/signin");
 });
 
 Cypress.Commands.add("deleteRequests", () => {

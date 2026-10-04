@@ -12,7 +12,7 @@ describe("Login", () => {
 
     cy.contains("button", "Logar").click();
 
-    cy.url().should("eq", "http://localhost:3002/");
+    cy.url().should("eq", "http://localhost:3000/");
   });
 
   it("deve exibir erro com credenciais inválidas", () => {
@@ -29,6 +29,6 @@ describe("Login", () => {
 
   it("não deve ser possivel entrar em outras rotas sem estar logado", () => {
     cy.visit("/");
-    cy.url().should("eq", "http://localhost:3002/signin");
+    cy.url().should("eq", "http://localhost:3000/signin");
   });
 });

@@ -19,7 +19,7 @@ services:
       - postgres_data:/var/lib/postgresql/data
 
   solicita:
-    image: dovcaio/solicita-backend:sha-991a895
+    image: dovcaio/solicita-backend:sha-1faeae5
     container_name: solicita-backend
     restart: unless-stopped
     depends_on:
@@ -28,7 +28,7 @@ services:
       SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/solicita
       SPRING_DATASOURCE_USERNAME: solicita
       SPRING_DATASOURCE_PASSWORD: solicita
-      CORS_ALLOWED_ORIGIN: http://localhost:3002
+      CORS_ALLOWED_ORIGIN: http://localhost:3000
     ports:
       - "8080:8080"
     networks:
