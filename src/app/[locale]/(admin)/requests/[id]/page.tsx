@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import { Request } from "@/types/Request";
 import { api } from "@/lib/api";
 import { LoadingRequestDetails } from "@/components/loading/LoadingRequestDetails";
+import { RequestStatusDialog } from "@/components/request/RequestStatusDialog";
 
 export default function RequestPage() {
   const params = useParams<{ id: string }>();
@@ -40,6 +41,11 @@ export default function RequestPage() {
         ) : (
           <>
             <RequestDetail request={request} />
+            <RequestStatusDialog
+              request={request}
+              onUpdated={setRequest}
+              onClose={() => {}}
+            />
             <RequestEditForm request={request} onUpdated={setRequest} />
           </>
         )}
