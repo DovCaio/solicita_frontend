@@ -1,0 +1,43 @@
+services:
+  postgres:
+    image: postgres:17
+    container_name: solicita-postgres
+    restart: unless-stopped
+
+    environment:
+      POSTGRES_DB: solicita
+      POSTGRES_USER: solicita
+      POSTGRES_PASSWORD: solicita
+
+    ports:
+      - "5432:5432"
+
+    networks:
+      - solicita-network
+
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  solicita:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: solicita-backend
+    restart: unless-stopped
+    depends_on:
+      - postgres
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/solicita
+      SPRING_DATASOURCE_USERNAME: solicita
+      SPRING_DATASOURCE_PASSWORD: solicita
+      CORS_ALLOWED_ORIGIN: http://localhost:3002
+    ports:
+      - "8080:8080"
+    networks:
+      - solicita-network
+
+volumes:
+  postgres_data:
+
+networks:
+  solicita-network:

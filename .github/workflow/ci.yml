@@ -1,0 +1,90 @@
+name: Frontend CI
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  frontend:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run ESLint
+        run: npm run lint
+
+      - name: Check TypeScript
+        run: npx tsc --noEmit
+
+      - name: Build application
+        run: npm run build
+
+      - name: Start backend and database
+        run: docker compose up -d --build
+
+      - name: Wait for backend
+        run: |
+          echo "Aguardando backend..."
+
+          for i in {1..30}; do
+            if curl --fail --silent http://localhost:8080/v3/api-docs > /dev/null; then
+              echo "Backend disponível."
+              exit 0
+            fi
+
+            sleep 2
+          done
+
+          echo "Backend não ficou disponível."
+          docker compose logs
+          exit 1
+
+      - name: Start frontend
+        run: |
+          npm run dev -- -p 3002 > frontend.log 2>&1 &
+
+      - name: Wait for frontend
+        run: |
+          echo "Aguardando frontend..."
+
+          for i in {1..30}; do
+            if curl --fail --silent http://localhost:3002 > /dev/null; then
+              echo "Frontend disponível."
+              exit 0
+            fi
+
+            sleep 2
+          done
+
+          echo "Frontend não ficou disponível."
+          cat frontend.log
+          exit 1
+
+      - name: Run Cypress
+        run: npx cypress run
+
+      - name: Upload Cypress artifacts
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: cypress-artifacts
+          path: |
+            cypress/screenshots
+            cypress/videos
+            frontend.log
+
+      - name: Stop services
+        if: always()
+        run: docker compose down -v
