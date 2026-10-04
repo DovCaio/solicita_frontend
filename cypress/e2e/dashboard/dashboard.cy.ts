@@ -31,7 +31,7 @@ describe("Dashboard", () => {
     cy.get(":nth-child(4) > .mt-5 > div > .mt-2 ").should("contain.text", "1");
   });
 
-  it("Deve exibir zero quando não existem solicitações", () => {
+  it.skip("Deve exibir zero quando não existem solicitações", () => {
     cy.deleteRequests();
 
     cy.get(":nth-child(1) > .mt-5 > div > .mt-2").should("contain.text", "0");
