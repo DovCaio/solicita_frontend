@@ -86,7 +86,6 @@ export const RequestStatusDialog = ({
             id="status"
             value={status}
             onChange={(e) => setStatus(e.target.value as Request["status"])}
-            className="h-11 w-full rounded-lg border border-gray-300 bg-white px-4 text-sm text-gray-800 outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20 dark:border-gray-700 dark:bg-gray-900 dark:text-white"
           >
             {Object.entries(statusLabels).map(([value, label]) => (
               <option key={value} value={value}>
@@ -97,15 +96,6 @@ export const RequestStatusDialog = ({
         </div>
 
         <div className="mt-6 flex justify-end gap-3">
-          <button
-            type="button"
-            onClick={onClose}
-            disabled={loading}
-            className="rounded-lg border border-gray-300 px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 disabled:opacity-50 dark:border-gray-700 dark:text-gray-300 dark:hover:bg-gray-800"
-          >
-            Cancelar
-          </button>
-
           <button
             type="submit"
             disabled={loading}
