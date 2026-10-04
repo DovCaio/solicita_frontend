@@ -61,5 +61,9 @@ export default defineConfig({
       });
     },
     baseUrl: "http://localhost:3000",
+    retries: {
+      runMode: 4,
+      openMode: 0,
+    },
   },
 });
