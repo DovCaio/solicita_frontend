@@ -14,7 +14,7 @@ interface Metrics {
   completed: number;
 }
 
-export const EcommerceMetrics = () => {
+export const DashboardMetrics = () => {
   const t = useTranslations("ecommerce.metrics");
 
   const [metrics, setMetrics] = useState<Metrics>({
