@@ -26,7 +26,8 @@ jobs:
         run: npm run build
 
       - name: Start backend and database
-        run: docker compose up -d --build
+        working-directory: backend
+        run: docker compose up -d
 
       - name: Wait for backend
         run: |
@@ -42,7 +43,7 @@ jobs:
           done
 
           echo "Backend não ficou disponível."
-          docker compose logs
+          docker compose -f backend/docker-compose.yml logs
           exit 1
 
       - name: Start frontend
