@@ -41,6 +41,7 @@ declare global {
     interface Chainable {
       login(): Chainable<void>;
       deleteRequests(): Chainable<void>;
+      createARequest(): Chainable<void>;
     }
   }
 }
@@ -60,4 +61,8 @@ Cypress.Commands.add("login", () => {
 
 Cypress.Commands.add("deleteRequests", () => {
   cy.task("clearRequests");
+});
+
+Cypress.Commands.add("createARequest", () => {
+  cy.task("createRequest");
 });

@@ -23,6 +23,7 @@ interface TableRowProps {
   children: ReactNode; // Cells (th or td)
   className?: string; // Optional className for styling
   onClick?: () => void; // Optional click handler
+  id?: string;
 }
 
 // Props for TableCell
@@ -52,9 +53,10 @@ const TableRow: React.FC<TableRowProps> = ({
   children,
   className,
   onClick,
+  id,
 }) => {
   return (
-    <tr onClick={onClick} className={className}>
+    <tr onClick={onClick} id={id} className={className}>
       {children}
     </tr>
   );

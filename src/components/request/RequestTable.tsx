@@ -69,6 +69,7 @@ export const RequestTable = ({ data, loading }: RequestTableProps) => {
           data.map((request) => (
             <TableRow
               key={request.id}
+              id={`${request.id}-request`}
               className="hover:cursor-pointer hover:bg-gray-50 dark:hover:bg-white/5"
               onClick={() => {
                 route.push(`/requests/${request.id}`);
