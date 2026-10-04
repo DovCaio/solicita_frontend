@@ -87,7 +87,7 @@ export const RequestTable = ({ data, loading }: RequestTableProps) => {
                 {request.status}
               </TableCell>
               <TableCell className="px-5 py-3 text-start text-theme-sm text-gray-700 dark:text-gray-300">
-                {request.createdAt}
+                {new Date(request.createdAt).toLocaleString("pt-BR")}
               </TableCell>
             </TableRow>
           ))
