@@ -9,12 +9,9 @@ O projeto permite que usuários autenticados criem, consultem, editem e acompanh
 - [Next.js](https://nextjs.org/) 16
 - React 19
 - TypeScript
-- Material UI (MUI)
 - Tailwind CSS
 - Axios
-- next-intl
 - Cypress
-- Tabler Icons
 
 ## Funcionalidades
 
