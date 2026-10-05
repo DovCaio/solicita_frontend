@@ -291,6 +291,40 @@ O frontend depende da API REST desenvolvida no repositório do backend.
 
 **Backend:** [`link`](https://github.com/DovCaio/solicita_backend.git)
 
+## Screenshots
+
+### Login
+
+![Login](./screenshots/1-login_page.png)
+
+### Criação de solicitação
+
+![Criação de solicitação](./screenshots/2-requisition_creation.png)
+
+### Lista de solicitações
+
+![Lista de solicitações](./screenshots/3-table_requests.png)
+
+### Detalhes da solicitação
+
+![Detalhes da solicitação](./screenshots/4-request_details.png)
+
+### Alteração de status
+
+![Alteração de status](./screenshots/5-field_status_change.png)
+
+### Edição de solicitação
+
+![Edição de solicitação](./screenshots/6-request_edit.png)
+
+### Dashboard
+
+![Dashboard](./screenshots/7-dashboard.png)
+
+### Tratamento de erros
+
+![Tratamento de erros](./screenshots/8-error_handling.png)
+
 ## Autor
 
 **Caio Jhonatan**
