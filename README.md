@@ -156,7 +156,7 @@ Para executar o projeto localmente, é necessário possuir:
 Clone o repositório:
 
 ```bash
-git clone <URL_DO_REPOSITORIO>
+git clone https://github.com/DovCaio/solicita_frontend.git
 cd solicita-frontend
 ```
 
@@ -289,7 +289,41 @@ O Cypress foi utilizado para validar o comportamento da aplicação de forma pr�
 
 O frontend depende da API REST desenvolvida no repositório do backend.
 
-**Backend:** `<URL_DO_REPOSITORIO_BACKEND>`
+**Backend:** [`link`](https://github.com/DovCaio/solicita_backend.git)
+
+## Screenshots
+
+### Login
+
+![Login](./screenshots/1-login_page.png)
+
+### Criação de solicitação
+
+![Criação de solicitação](./screenshots/2-requisition_creation.png)
+
+### Lista de solicitações
+
+![Lista de solicitações](./screenshots/3-table_requests.png)
+
+### Detalhes da solicitação
+
+![Detalhes da solicitação](./screenshots/4-request_details.png)
+
+### Alteração de status
+
+![Alteração de status](./screenshots/5-field_status_change.png)
+
+### Edição de solicitação
+
+![Edição de solicitação](./screenshots/6-request_edit.png)
+
+### Dashboard
+
+![Dashboard](./screenshots/7-dashboard.png)
+
+### Tratamento de erros
+
+![Tratamento de erros](./screenshots/8-error_handling.png)
 
 ## Autor
 
